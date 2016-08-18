@@ -10,33 +10,33 @@
 var attractionsModule = (function () {
 
   // application state
-  Promise.all([
-    $.ajax({
-      method: 'GET',
-      url: '/api/hotels'
-    })
-      .catch(function (errorObj) {
-        // some code to run if the request errors out
-      }),
-    $.ajax({
-      method: 'GET',
-      url: '/api/restaurants'
-    })
-      .catch(function (errorObj) {
-        // some code to run if the request errors out
-      }),
-    $.ajax({
-      method: 'GET',
-      url: '/api/activities'
-    })
-      .catch(function (errorObj) {
-        // some code to run if the request errors out
-      })
-  ]).then(function (contents) {
+  // Promise.all([
+  //   $.ajax({
+  //     method: 'GET',
+  //     url: '/api/hotels'
+  //   })
+  //     .catch(function (errorObj) {
+  //       // some code to run if the request errors out
+  //     }),
+  //   $.ajax({
+  //     method: 'GET',
+  //     url: '/api/restaurants'
+  //   })
+  //     .catch(function (errorObj) {
+  //       // some code to run if the request errors out
+  //     }),
+  //   $.ajax({
+  //     method: 'GET',
+  //     url: '/api/activities'
+  //   })
+  //     .catch(function (errorObj) {
+  //       // some code to run if the request errors out
+  //     })
+  // ]).then(function (contents) {
     var enhanced = {
-      hotels: contents[0].map(attractionModule.create),
-      restaurants: contents[1].map(attractionModule.create),
-      activities: contents[2].map(attractionModule.create)
+      hotels: hotels.map(attractionModule.create),
+      restaurants: restaurants.map(attractionModule.create),
+      activities: activities.map(attractionModule.create)
     }
 
     // private helper methods (only available inside the module)
@@ -64,9 +64,9 @@ var attractionsModule = (function () {
         if (found) return found
         throw Error('enhanced version not found', databaseAttraction)
       }
-
     }
 
     return publicAPI
   })
+  .catch(console.log)
 }())

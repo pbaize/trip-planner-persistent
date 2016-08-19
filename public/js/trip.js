@@ -74,7 +74,12 @@ var tripModule = (function () {
 
   var publicAPI = {
     load: function () {
-      $(addDay)
+      $.ajax('/api/days/').then(function (dbDays) {
+        if (days.length > 0) {
+          days = dbDays
+          switchTo(days[0])
+        } else $(addDay)
+      })
     },
 
     switchTo: switchTo,
